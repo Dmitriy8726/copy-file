@@ -1,0 +1,65 @@
+1) ZAD
+ 1 (CADR (CADAAR '(((1 (2 *)) 3) 4)))
+ 2 (CADR (CDAADR '(1 (((2 3) (4 5) *) (6)))))
+ 3 (CAR(CAADAR '((1 ((*) 2 3)))))
+ 4 (CAR(CADADR '(1 (2 (* 3) 4) 5)))
+ 5 (CAR(CDDADR '(1 (2 (3 4) *) 5)))
+ 6 (CADR(CADADR '((1 2) (3 (4 *) 5))))
+ 7 (CAR(CDAADR '((1) ((2 *)) (3 (4)))))
+ 8 (CAR(CADDAR(CDDDAR '((1 2 3 (4 5 (*)))))))
+ 9 (CADDAR(CDADAR '((1 (2 (3 4 *))))))
+ 10 (CADAR(CDADAR '((1 (2 (3 *))))))
+2) ZAD
+ 1 (cons nil nil)
+	cons - обратная CAR CDR - СОЕДИНЯЕТ голову и хвост
+	(NIL)
+ 2 (list '(a b) 7 '(())) 
+	LIST - делает из нескольких элементов СПИСОК
+	((A B) 7 (NIL)) 
+ 3 (cons '(+ 1 2) '(+ 4 6))
+
+	((+ 1 2) + 4 6) 
+ 4 (append '(+ 1 2) '())
+
+	Функция берет любое число списков (<выражений>) и сливает их вместе как один список
+	(+ 1 2) 
+ 5 (cons '(a (b c)) nil)
+	((A (B C)))
+ 6 (append nil '(a b c))
+ 
+	(A B C) 
+ 7 (list '(+ 1 2) '() '(+ 1))
+	((+ 1 2) NIL (+ 1)) 
+ 8 (append '(4 5 6) '()'(()))
+
+	(4 5 6 NIL) 
+ 9 (cons (+ 1 2) '(+ 4 6))
+
+	(3 + 4 6) 
+ 10 (list '(+ 1 2) '())
+	((+ 1 2) NIL) 
+3) ZAD
+ 1 (CONS 1 (CONS (CONS 2 '(3)) NIL))
+   (LIST '1 (LIST '2 '3))
+ 2 (CONS 1(CONS (CONS 2 NIL) (CONS 3 NIL)))
+   (LIST '1 (LIST '2) '3) 
+ 3 (CONS(CONS (CONS 1 (CONS 2 '(3))) NIL) NIL)
+   (LIST(LIST (LIST '1 '2 '3)))
+ 4 (CONS (CONS 1 NIL) (CONS (CONS 2 (CONS (CONS 3 NIL) NIL)) NIL))
+   (LIST (LIST '1) (LIST '2 (LIST '3)))
+ 5 (CONS (CONS 1 NIL)(CONS (CONS 2 (CONS 3 NIL)) NIL))
+   (LIST (LIST '1) (LIST '2 '3))
+ 6 (CONS (CONS 1 (CONS (CONS 2(CONS (CONS 3 NIL) NIL)) NIL)) NIL)
+   (LIST (LIST '1 (LIST '2 (LIST '3))))
+ 7 (CONS (CONS '1(CONS 2 (CONS '((3)) NIL))) NIL)
+   (LIST (LIST '1 '2 (LIST '(3))))
+ 8 (CONS (CONS 1 (CONS 2 NIL))(CONS '3 NIL))
+   (LIST(LIST '1 '2) '3)
+ 9 (CONS(CONS (CONS (CONS 1 NIL) NIL)(CONS 2 NIL))(CONS 3 NIL))
+   (LIST (LIST (LIST(LIST '1)) '2) '3)
+ 10 (CONS '1(CONS '((2)) (CONS '(3) NIL)))
+    (LIST '1 (LIST '(2)) '(3))
+4) ZAD (F '(1 2 3 4 5 8 9 10 ))
+ 1 (DEFUN F (X) (APPEND(CONS (CAR(LAST X))(BUTLAST (CDR X))) (LIST(CAR X)))) 
+ 2 (DEFUN F (X)  (CONS (CADR X)(CONS  (CAR X) (CDDR X))))
+ 3 
