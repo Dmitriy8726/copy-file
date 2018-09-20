@@ -1,0 +1,89 @@
+#include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
+
+#include <sys/stat.h>
+#include <sys/types.h>
+#include <dirent.h>
+#include <unistd.h>
+#include <fcntl.h>
+
+
+int main()
+{
+
+    int fd;
+    DIR *dir, *dir1, *dir2;
+    struct dirent *entry;
+    struct dirent *entry1;
+    struct stat statbuf;
+    char buff[7] = "/proc/";
+    char tmp[20];
+    char tmp1 [40];
+
+    //1
+   // fd = open("text.txt", O_CREAT | O_WRONLY);
+    //if (!fd)
+    //{
+     //   return 0;
+    //}
+
+
+
+
+    //2
+    int i = 0;
+    dir = opendir("/tmp/");
+    if (!dir)
+    {
+        return 0;
+    }
+
+    while ( (entry = readdir(dir)) != NULL)
+    {
+        lstat(entry->d_name, &statbuf);
+        //printf("%lld bytes\n",  (long long) statbuf.st_size);
+        i++;
+    }
+
+    printf("%i\n", i);
+    closedir(dir);
+
+
+    //3
+    dir1 = opendir("/proc/");
+    if (!dir1)
+    {
+        return 0;
+    }
+
+    while ( (entry = readdir(dir1)) != NULL)
+    {
+        snprintf(tmp, sizeof tmp, "%s%s",buff,entry->d_name);
+        dir2 = opendir(tmp);
+        if (dir2)
+        {
+            while ( (entry1 = readdir(dir2)) != NULL)
+            {
+                if (strcmp (entry1->d_name, "stat") == 0)
+                {
+                     printf("%s\n", tmp);
+                    snprintf(tmp1, sizeof tmp1, "%s%s",tmp,entry->d_name);
+                    fd = open(tmp1,O_WRONLY);
+                    if (!fd)
+                    {
+                        break;
+                    }
+
+                }
+            }
+        }
+
+
+    }
+
+    closedir(dir1);
+    closedir(dir2);
+    return 0;
+
+}
