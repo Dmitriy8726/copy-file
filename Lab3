@@ -1,0 +1,46 @@
+Являются ли два множества пересекающимися.
+(defun f (x y) 
+  (cond ((null x) nil)
+        ((member (car x) y) t)
+        (t (f (cdr x) y))))
+
+(print (f '(0 2 5) '(3 1)))
+
+
+2
+(defun in-predicate (a l)
+
+    (cond
+
+        ((null l) nil)
+
+        ((eq a (car l)) t)
+
+        (t (in-predicate a (cdr l))) 
+
+    )
+
+)
+
+(defun un (a b)
+
+    (cond ((null a) b)
+
+        ((null b) a)
+
+        (( in-predicate (car a) b) (un (cdr a) b) )
+
+        (t (cons (car a) (un (cdr a) b)))
+
+    )
+
+)
+
+Maplist
+(maplist! '(1 2 3 4) 'length)
+(defun maplist! (lst f)
+  (cond ((null lst) nil)
+        (t (cons (funcall f lst) (maplist! (cdr lst) f)))))
+
+
+
